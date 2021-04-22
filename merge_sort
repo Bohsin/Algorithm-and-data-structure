@@ -1,0 +1,33 @@
+
+def merge(li, left, mid, right):
+    '''
+    [left: mid]
+    [mid+1: right]
+    '''
+    ltmp = []
+    i = left
+    j = mid + 1
+    while i <= mid and j <= right:
+        if li[i] < li[j]:
+            ltmp.append(li[i])
+            i += 1
+        else:
+            ltmp.append(li[j])
+            j += 1
+    while i <= mid:
+        ltmp.append(li[i])
+        i += 1
+    while j <= right:
+        ltmp.append(li[j])
+        j += 1
+    li[left:right+1] = ltmp
+    
+def _merge_sort(li, left, right):
+    if left < right:
+        mid = (left+right)//2
+        _merge_sort(li, left, mid)
+        _merge_sort(li, mid+1, right)
+        merge(li, left, mid, right)
+
+def merge_sort(li):
+    _merge_sort(li, 0, len(li)-1)
